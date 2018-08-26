@@ -1,28 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Cat Clicker</title>
-</head>
-<body>
-    <ul></ul>
-    <div data-bind="with:currentCat">
-
-        <h2 data-bind="text: name"></h2>
-        <h3 data-bind="text: level"></h3>
-        <div data-bind="text: clickCount"></div>
-        <img src="" alt="cute cat" data-bind="click: $parent.incrementCounter,
-        attr: {src: imgSrc}">
-        <div>
-            <h3>Nicknames:</h3>
-            <ul data-bind="foreach: nicknames">
-                <li data-bind="text: $data"></li>
-            </ul>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="css/styles.css">
+        <title>Neighborhood Map</title>
+    </head>
+    <body>
+        <div class="container">
+            <div class="options-box">
+                <h1>Find Where to Eat in Bellevue</h1>
+                <div>
+                    <p>Filter: 
+                        <select data-bind="options: foodCategories, value: selectedFoodCategory, event:{ change: foodCategoryHandler}"></select>
+                    </p>
+                    <ul data-bind="foreach: locations()">
+                        <!-- ko if: category === $parent.selectedFoodCategory() || $parent.selectedFoodCategory() === 'All' -->
+                        <li>
+                            <a href="#" data-bind="text:title, click: $parent.showPlaceInfo"></a>
+                        </li>
+                        <!-- /ko -->
+                    </ul> 
+                </div>
+            </div>
+            <div id="map"></div>
         </div>
 
-    </div>
-    <script src="js/lib/knockout-3.2.0.js"></script>
-    <script src="js/lib/jquery-3.3.1.js"></script>
-    <script src="js/app.js"></script>
-</body>
+        <script src="js/lib/knockout-3.2.0.js"></script>
+        <script src="js/lib/jquery-3.3.1.min.js"></script>
+        <script src="js/app.js"></script>
+        <script async defer
+            src=
+            "https://maps.googleapis.com/maps/api/js?libraries=places,geometry,drawing&key=AIzaSyA9Ygvrik0z4aq-5aK1iQeej38LTW0dfz4&v=3&callback=initMap">
+        </script>
+        <script async defer
+            src=
+            "">
+        </script>
+
+    </body>
 </html>

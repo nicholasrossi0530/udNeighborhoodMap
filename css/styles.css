@@ -80,3 +80,7 @@ hr {
 #zoom-to-area {
   width: 24%;
 }
+
+.yelp-image {
+  max-height: 100px;
+}
