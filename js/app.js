@@ -153,16 +153,6 @@ function initMap() {
     markers.push(marker);
     // Create an onclick event to open the large infowindow at each marker.
     marker.addListener('click', function() {
-      if(this.icon.url.includes('FFFF24')) {
-        this.setIcon(defaultIcon);
-      } else {
-        this.setIcon(highlightedIcon);
-      }
-      for (var i = 0; i < markers.length; i++) {
-        if(markers[i] !== this){
-          markers[i].setIcon(defaultIcon);
-        }
-      }
       populateInfoWindow(this, largeInfowindow);
     });
   }
@@ -208,6 +198,23 @@ function populateInfoWindow(marker, infowindow) {
     // Use streetview service to get the closest streetview image within
     // 50 meters of the markers position
     streetViewService.getPanoramaByLocation(marker.position, radius, getYelpData);
+    // Style the markers a bit. This will be our listing marker icon.
+    var defaultIcon = makeMarkerIcon('0091ff');
+
+    // Create a "highlighted location" marker color for when the user
+    // mouses over the marker.
+    var highlightedIcon = makeMarkerIcon('FFFF24');
+    // set the correct colors for icons
+    if(marker.icon.url.includes('FFFF24')) {
+        marker.setIcon(defaultIcon);
+      } else {
+        marker.setIcon(highlightedIcon);
+      }
+      for (var i = 0; i < markers.length; i++) {
+        if(markers[i] !== marker){
+          markers[i].setIcon(defaultIcon);
+        }
+      }
     // Open the infowindow on the correct marker.
     infowindow.open(map, marker);
   }
